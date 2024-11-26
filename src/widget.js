@@ -1,4 +1,26 @@
 (function() {
+    // Widget initialization function
+    function initWidget(targetId) {
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        
+        target.innerHTML = `
+            <div id="gradient-text-generator">
+                <!-- Your original HTML structure -->
+                <div class="gtg-main-content">
+                    <!-- Paste your entire original HTML here -->
+                </div>
+            </div>
+        `;
+
+        // Initialize all 5 color pickers
+        for (let i = 1; i <= 5; i++) {
+            initColorPicker(`color${i}`);
+        }
+        updatePreview();
+    }
+
+(function() {
     // Generate unique widget ID to avoid conflicts
     const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
     

@@ -4,25 +4,7 @@
         const target = document.getElementById(targetId);
         if (!target) return;
         
-        target.innerHTML = `
-            <div id="gradient-text-generator">
-                <!-- Your original HTML structure -->
-                <div class="gtg-main-content">
-                    <!-- Paste your entire original HTML here -->
-                </div>
-            </div>
-        `;
 
-        // Initialize all 5 color pickers
-        for (let i = 1; i <= 5; i++) {
-            initColorPicker(`color${i}`);
-        }
-        updatePreview();
-    }
-
-    function initGradientGenerator(targetId) {
-        const target = document.getElementById(targetId);
-        if (!target) return;
         
         // Create widget HTML
         const widget = document.createElement('div');
@@ -142,6 +124,13 @@
                 </div>
             </div>
         `;
+
+        // Initialize all 5 color pickers
+        for (let i = 1; i <= 5; i++) {
+            initColorPicker(`color${i}`);
+        }
+        updatePreview();
+    }
         
         target.appendChild(widget);
         initializeEventListeners();

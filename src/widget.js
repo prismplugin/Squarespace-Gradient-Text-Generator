@@ -20,10 +20,6 @@
         updatePreview();
     }
 
-(function() {
-    // Generate unique widget ID to avoid conflicts
-    const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
-    
     function initGradientGenerator(targetId) {
         const target = document.getElementById(targetId);
         if (!target) return;

@@ -170,56 +170,54 @@
         updatePreview();
     }
 
-    function validateAndFormatColor(value) {
-        // Remove spaces and any non-alphanumeric characters except #
-        let color = value.trim().replace(/[^0-9A-Fa-f#]/g, '');
-        
-        // If there's no #, add it at the beginning
-        if (!color.startsWith('#')) {
-          color = '#' + color;
-        }
-        
-        // Remove any extra # symbols after the first one
-        color = '#' + color.slice(1).replace(/#/g, '');
-        
-        // Check if it's a valid 6-digit hex color
-        const isValid = /^#[0-9A-Fa-f]{6}$/.test(color);
-        
-        return { isValid, formattedColor: color };
-      }
-      
-      // Update the initColorPicker function to handle empty defaults
-      function initColorPicker(colorId) {
-        const picker = document.getElementById(colorId);
-        const text = document.getElementById(`${colorId}-text`);
-        const preview = document.getElementById(`${colorId}-preview`);
-        
-        // Clear defaults for optional colors (3, 4, and 5)
-        if (colorId.match(/color[3-5]/)) {
-          text.value = '';
-          preview.style.backgroundColor = 'transparent';
-          // Can't set color input to empty, but we can avoid using its value
-        }
-      
-        // Initialize with validation only for required colors (1 and 2)
-        if (colorId.match(/color[1-2]/)) {
-          const initialValidation = validateAndFormatColor(picker.value);
-          if (initialValidation.isValid) {
+function validateAndFormatColor(value) {
+    // Remove spaces and any non-alphanumeric characters except #
+    let color = value.trim().replace(/[^0-9A-Fa-f#]/g, '');
+    
+    // If there's no #, add it at the beginning
+    if (!color.startsWith('#')) {
+        color = '#' + color;
+    }
+    
+    // Remove any extra # symbols after the first one
+    color = '#' + color.slice(1).replace(/#/g, '');
+    
+    // Check if it's a valid 6-digit hex color
+    const isValid = /^#[0-9A-Fa-f]{6}$/.test(color);
+    
+    return { isValid, formattedColor: color };
+}
+
+function initColorPicker(colorId) {
+    const picker = document.getElementById(colorId);
+    const text = document.getElementById(`${colorId}-text`);
+    const preview = document.getElementById(`${colorId}-preview`);
+    
+    // Clear defaults for optional colors (3, 4, and 5)
+    if (colorId.match(/color[3-5]/)) {
+        text.value = '';
+        preview.style.backgroundColor = 'transparent';
+    }
+
+    // Initialize with validation only for required colors (1 and 2)
+    if (colorId.match(/color[1-2]/)) {
+        const initialValidation = validateAndFormatColor(picker.value);
+        if (initialValidation.isValid) {
             text.value = initialValidation.formattedColor;
             preview.style.backgroundColor = initialValidation.formattedColor;
-          }
         }
-      
-        // Rest of the event listeners remain the same
-        picker.addEventListener('input', (e) => {
-          const { isValid, formattedColor } = validateAndFormatColor(e.target.value);
-          if (isValid) {
+    }
+
+    // Rest of the event listeners remain the same
+    picker.addEventListener('input', (e) => {
+        const { isValid, formattedColor } = validateAndFormatColor(e.target.value);
+        if (isValid) {
             text.value = formattedColor;
             preview.style.backgroundColor = formattedColor;
             text.style.borderColor = '#444';
             updatePreview();
-          }
-        });
+        }
+    });
       
         text.addEventListener('input', (e) => {
           const { isValid, formattedColor } = validateAndFormatColor(e.target.value);

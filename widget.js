@@ -159,8 +159,8 @@
         <button onclick="copyToClipboard()" class="gtg-action-button gtg-copy-button">Copy Code</button>
       </div>
     </div>
+  ;
   
-    <script>
 // Add this validation function
 function validateAndFormatColor(value) {
   // Remove spaces and any non-alphanumeric characters except #

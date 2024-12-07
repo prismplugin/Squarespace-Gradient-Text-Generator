@@ -4,23 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gradient Text Generator</title>
-    
-    <!-- Import required font -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Import your style.css -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="gradient-text-generator"></div>
 
+    <!-- Scripts at the bottom -->
     <script src="widget.js"></script>
     <script>
-        console.log('Debug: Starting initialization');
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Debug: DOM loaded');
-            const target = document.getElementById('gradient-text-generator');
-            console.log('Debug: Target element found:', !!target);
+        // Wait for everything to load
+        window.addEventListener('load', function() {
+            console.log('Page loaded, initializing widget...');
             initGradientGenerator('gradient-text-generator');
         });
     </script>

@@ -4,14 +4,17 @@
     
     function initGradientGenerator(targetId) {
         const target = document.getElementById(targetId);
-        if (!target) return;
+        if (!target) {
+            console.log('Target element not found:', targetId); // Add this debug line
+            return;
+        }
         
         // Create widget HTML
         const widget = document.createElement('div');
         widget.id = widgetId;
         widget.innerHTML = `
-    <div class="gtg-main-content">
-      <h2 class="gtg-tool-title">Gradient Text Generator</h2>
+            <div class="gtg-main-content">
+                <h2 class="gtg-tool-title">Gradient Text Generator</h2>
 
       <div class="gtg-compact-group">
         <div class="gtg-input-group" style="flex: 1;">
@@ -160,6 +163,11 @@
       </div>
     </div>
   ;
+ target.appendChild(widget);
+        initializeEventListeners();
+        initializeColorPickers();
+        updatePreview();
+    }
   
 // Add this validation function
 function validateAndFormatColor(value) {

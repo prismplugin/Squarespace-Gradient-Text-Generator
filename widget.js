@@ -410,24 +410,7 @@ function initColorPicker(colorId) {
         document.execCommand('copy');
       }
       
-      // Event listeners
-      document.querySelectorAll('input, select').forEach(input => {
-        input.addEventListener('input', updatePreview);
-      });
-      
-      // Synchronize angle inputs
-      document.getElementById('gtg-angle-slider').addEventListener('input', (e) => {
-        document.getElementById('gtg-angle-input').value = e.target.value;
-        updatePreview();
-      });
-      
-      document.getElementById('gtg-angle-input').addEventListener('input', (e) => {
-        const value = Math.min(360, Math.max(0, e.target.value));
-        document.getElementById('gtg-angle-slider').value = value;
-        updatePreview();
-      });
-
-      // Initialize
+    // Initialize
     function initializeWidget() {
         // Event listeners
         document.querySelectorAll('input, select').forEach(input => {

@@ -12,14 +12,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Container for the widget -->
     <div id="gradient-text-generator"></div>
 
-    <!-- Import widget script -->
     <script src="widget.js"></script>
     <script>
-        // Initialize after DOM loads
+        console.log('Debug: Starting initialization');
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Debug: DOM loaded');
+            const target = document.getElementById('gradient-text-generator');
+            console.log('Debug: Target element found:', !!target);
             initGradientGenerator('gradient-text-generator');
         });
     </script>

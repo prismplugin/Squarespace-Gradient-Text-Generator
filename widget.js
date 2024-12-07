@@ -436,6 +436,7 @@ function initColorPicker(colorId) {
         updatePreview();
     }
 
- // Make initialization function globally available
+    // Make initialization function globally available
     window.initGradientGenerator = initGradientGenerator;
-})();
+    console.log('Widget loaded: initGradientGenerator available:', !!window.initGradientGenerator);
+})();  

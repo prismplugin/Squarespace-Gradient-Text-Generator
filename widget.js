@@ -3,13 +3,13 @@
     const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
     
     function initGradientGenerator(targetId) {
+        console.log('Initializing widget...');
         const target = document.getElementById(targetId);
         if (!target) {
-            console.log('Target element not found:', targetId);
+            console.error('Target element not found:', targetId);
             return;
         }
         
-        // Create widget HTML
         const widget = document.createElement('div');
         widget.id = widgetId;
         widget.innerHTML = `
@@ -165,9 +165,45 @@
         `;  // Close the template literal
         
         target.appendChild(widget);
-        initializeEventListeners();
-        initializeColorPickers();
-        updatePreview();
+        
+        // THEN initialize everything
+        try {
+            console.log('Setting up event listeners...');
+            initializeEventListeners();
+            initializeColorPickers();
+            updatePreview();
+            console.log('Widget initialized successfully');
+        } catch (error) {
+            console.error('Error initializing widget:', error);
+        }
+    }
+
+    // Initialize event listeners
+    function initializeEventListeners() {
+        // Add null checks
+        const angleSlider = document.getElementById('gtg-angle-slider');
+        const angleInput = document.getElementById('gtg-angle-input');
+        
+        if (angleSlider && angleInput) {
+            angleSlider.addEventListener('input', (e) => {
+                angleInput.value = e.target.value;
+                updatePreview();
+            });
+
+            angleInput.addEventListener('input', (e) => {
+                const value = Math.min(360, Math.max(0, e.target.value));
+                angleSlider.value = value;
+                updatePreview();
+            });
+        }
+
+        // Add other event listeners with null checks
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            if (input) {
+                input.addEventListener('input', updatePreview);
+            }
+        });
     }
 
 function validateAndFormatColor(value) {
@@ -417,6 +453,6 @@ function initColorPicker(colorId) {
         updatePreview();
     }
 
-    // Make initialization function globally available
+ // Make initialization function globally available
     window.initGradientGenerator = initGradientGenerator;
 })();

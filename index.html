@@ -8,15 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- The widget container -->
     <div id="gradient-text-generator"></div>
 
-    <!-- Scripts at the bottom -->
+    <!-- First load widget.js -->
     <script src="widget.js"></script>
+
+    <!-- Then initialize it AFTER widget.js is loaded -->
     <script>
-        // Wait for everything to load
+        // Make sure DOM and widget.js are both loaded
         window.addEventListener('load', function() {
-            console.log('Page loaded, initializing widget...');
-            initGradientGenerator('gradient-text-generator');
+            if (typeof initGradientGenerator === 'undefined') {
+                console.error('Widget script not loaded properly');
+            } else {
+                console.log('Initializing widget...');
+                initGradientGenerator('gradient-text-generator');
+            }
         });
     </script>
 </body>

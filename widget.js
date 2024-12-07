@@ -166,11 +166,16 @@
         
         target.appendChild(widget);
         
-        // THEN initialize everything
-        try {
+try {
             console.log('Setting up event listeners...');
             initializeEventListeners();
-            initializeColorPickers();
+            // Change this line to use the correct function name
+            initColorPicker('color1'); // Initialize first color
+            initColorPicker('color2'); // Initialize second color
+            // Initialize optional colors
+            for (let i = 3; i <= 5; i++) {
+                initColorPicker(`color${i}`);
+            }
             updatePreview();
             console.log('Widget initialized successfully');
         } catch (error) {

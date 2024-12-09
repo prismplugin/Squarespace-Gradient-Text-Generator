@@ -391,6 +391,18 @@
 `;
         
         target.appendChild(widget);
+<script>
+    window.addEventListener('load', function() {
+        console.log('DOM loaded, checking for initGradientGenerator...');
+        if (typeof initGradientGenerator === 'function') {
+            console.log('Initializing generator...');
+            initGradientGenerator('gradient-text-generator');
+        } else {
+            console.error('initGradientGenerator not found');
+        }
+    });
+</script>
+
         
         try {
             console.log('Setting up event listeners...');

@@ -501,15 +501,14 @@ function initColorPicker(colorId) {
             
 <div class="gtg-tabs">
     <div class="gtg-tab-buttons">
-        <button class="gtg-tab-button active" onclick="switchTab('css', event)">CSS Code</button>
-        <button class="gtg-tab-button" onclick="switchTab('html', event)">HTML Code</button>
+        <button class="gtg-tab-button active" data-tab="css">CSS Code</button>
+        <button class="gtg-tab-button" data-tab="html">HTML Code</button>
     </div>
     <textarea id="gtg-output" class="gtg-output" readonly></textarea>
 </div>
-    <div class="gtg-button-row">
-                    <button onclick="copyToClipboard()" class="gtg-action-button gtg-copy-button">Copy Code</button>
-                </div>
-            </div>
+<div class="gtg-button-row">
+    <button class="gtg-action-button gtg-copy-button">Copy Code</button>
+</div>
     `;  
     
     target.appendChild(widget);

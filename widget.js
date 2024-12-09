@@ -151,8 +151,8 @@
               
                   <div class="gtg-tabs">
                     <div class="gtg-tab-buttons">
-                      <button class="gtg-tab-button active" onclick="switchTab('css')">CSS Code</button>
-                      <button class="gtg-tab-button" onclick="switchTab('html')">HTML Code</button>
+<button class="gtg-tab-button active" onclick="switchTab('css', event)">CSS Code</button>
+<button class="gtg-tab-button" onclick="switchTab('html', event)">HTML Code</button>
                     </div>
                     <textarea id="gtg-output" class="gtg-output" readonly></textarea>
                   </div>
@@ -401,19 +401,29 @@ function initColorPicker(colorId) {
           document.querySelector('.gtg-tab-button.active').innerText.includes('CSS') ? css : html;
       }
       
-      function switchTab(tab) {
-        document.querySelectorAll('.gtg-tab-button').forEach(button => {
-          button.classList.remove('active');
-        });
-        event.target.classList.add('active');
-        generateCode();
-      }
-      
-      function copyToClipboard() {
-        const output = document.getElementById('gtg-output');
-        output.select();
-        document.execCommand('copy');
-      }
+// Update the switchTab function to accept the event parameter
+function switchTab(tab, event) {
+  document.querySelectorAll('.gtg-tab-button').forEach(button => {
+    button.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  generateCode();
+}
+
+// Update the copyToClipboard function to use the modern Clipboard API
+async function copyToClipboard() {
+  const output = document.getElementById('gtg-output');
+  try {
+    await navigator.clipboard.writeText(output.value);
+    // Optional: Add visual feedback
+    const copyButton = document.querySelector('.gtg-copy-button');
+    copyButton.textContent = 'Copied!';
+    setTimeout(() => {
+      copyButton.textContent = 'Copy Code';
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy:', err);
+  }
       
     // Initialize
     function initializeWidget() {

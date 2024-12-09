@@ -105,10 +105,10 @@
         padding: 0;
       }</style>`;
       
-        const html = `<${textElement} class="${className}">${displayText}</${textElement}>`;
+        const  = `<${textElement} class="${className}">${displayText}</${textElement}>`;
       
         document.getElementById('gtg-output').value = 
-          document.querySelector('.gtg-tab-button.active').innerText.includes('CSS') ? css : html;
+          document.querySelector('.gtg-tab-button.active').innerText.includes('CSS') ? css : ;
     }
 
     function initializeEventListeners() {
@@ -239,9 +239,6 @@
         const widget = document.createElement('div');
         widget.id = widgetId;
         widget.innerHTML = `
-            // Inside the initGradientGenerator function, replace the widget.innerHTML section with:
-
-widget.innerHTML = `
     <div class="gtg-main-content">
         <h2 class="gtg-tool-title">Gradient Text Generator</h2>
         <div class="gtg-compact-group">

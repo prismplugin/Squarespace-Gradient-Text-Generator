@@ -1,19 +1,14 @@
 (function() {
-    // Expose necessary functions to global scope
-    window.generateCode = generateCode;
-    window.switchTab = switchTab;
-    window.copyToClipboard = copyToClipboard;
-    window.initGradientGenerator = initGradientGenerator;
+    // First, declare all functions that need to be globally accessible
+    let generateCode;  // Declare here to be used in other functions
 
-    // Generate unique widget ID
-    const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
-    
+    // Define functions that need to be exposed globally
     function switchTab(tab, event) {
         document.querySelectorAll('.gtg-tab-button').forEach(button => {
             button.classList.remove('active');
         });
         event.target.classList.add('active');
-        generateCode();
+        generateCode();  // This will be defined later
     }
 
     async function copyToClipboard() {
@@ -33,7 +28,258 @@
         }
     }
 
-function initGradientGenerator(targetId) {
+    // Generate unique widget ID
+    const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
+
+function validateAndFormatColor(value) {
+    // Remove spaces and any non-alphanumeric characters except #
+    let color = value.trim().replace(/[^0-9A-Fa-f#]/g, '');
+    
+    // If there's no #, add it at the beginning
+    if (!color.startsWith('#')) {
+        color = '#' + color;
+    }
+    
+    // Remove any extra # symbols after the first one
+    color = '#' + color.slice(1).replace(/#/g, '');
+    
+    // Check if it's a valid 6-digit hex color
+    const isValid = /^#[0-9A-Fa-f]{6}$/.test(color);
+    
+    return { isValid, formattedColor: color };
+}
+
+          // Update getActiveColors function to use validation
+      function getActiveColors() {
+        const colors = [];
+        for (let i = 1; i <= 5; i++) {
+          const colorInput = document.getElementById(`color${i}-text`);
+          if (colorInput && colorInput.value.trim() !== '') {  // Only check if input has a value
+            const { isValid, formattedColor } = validateAndFormatColor(colorInput.value);
+            if (isValid) {
+              colors.push(formattedColor);
+            }
+          }
+        }
+        return colors.length > 0 ? colors : ['#FF5F6D', '#FFC371']; // Default colors if none are valid
+      }
+
+    // Update Preiew
+
+          function updatePreview() {
+        const text = document.getElementById('gtg-text').value;
+        const textElement = document.getElementById('gtg-text-element').value;
+        const textAlign = document.getElementById('gtg-text-align').value;
+        const fontSize = document.getElementById('gtg-font-size').value;
+        const fontUnit = document.getElementById('gtg-font-unit').value;
+        const fontWeight = document.getElementById('gtg-font-weight').value;
+        const isItalic = document.getElementById('gtg-italic').checked;
+        const isUppercase = document.getElementById('gtg-uppercase').checked;
+        const gradientType = document.querySelector('input[name="gradientType"]:checked').value;
+        const angle = document.getElementById('gtg-angle-slider').value;
+        const colors = getActiveColors();
+      
+        const gradient = gradientType === 'linear'
+          ? `linear-gradient(${angle}deg, ${colors.join(', ')})`
+          : `radial-gradient(circle at center, ${colors.join(', ')})`;
+      
+        const displayText = isUppercase ? text.toUpperCase() : text;
+      
+        const preview = document.getElementById('gtg-preview');
+        preview.innerHTML = `<${textElement} style="
+          background: ${gradient};
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          font-size: ${fontSize}${fontUnit};
+          font-weight: ${fontWeight};
+          font-style: ${isItalic ? 'italic' : 'normal'};
+          text-transform: ${isUppercase ? 'uppercase' : 'none'};
+          text-align: ${textAlign};
+          margin: 0;
+          padding: 0;
+          width: 100%;
+        ">${displayText}</${textElement}>`;
+      
+        generateCode();
+      }
+      
+      // Update the generateCode function
+      function generateCode() {
+        const text = document.getElementById('gtg-text').value;
+        const blockId = document.getElementById('gtg-block-id').value.trim();
+        const textElement = document.getElementById('gtg-text-element').value;
+        const textAlign = document.getElementById('gtg-text-align').value;
+        const fontSize = document.getElementById('gtg-font-size').value;
+        const fontUnit = document.getElementById('gtg-font-unit').value;
+        const fontWeight = document.getElementById('gtg-font-weight').value;
+        const isItalic = document.getElementById('gtg-italic').checked;
+        const isUppercase = document.getElementById('gtg-uppercase').checked;
+        const gradientType = document.querySelector('input[name="gradientType"]:checked').value;
+        const angle = document.getElementById('gtg-angle-slider').value;
+        const colors = getActiveColors();
+      
+        const className = `gradient-text-${text.toLowerCase().replace(/\s+/g, '-')}`;
+        const gradient = gradientType === 'linear'
+          ? `linear-gradient(${angle}deg, ${colors.join(', ')})`
+          : `radial-gradient(circle at center, ${colors.join(', ')})`;
+      
+        const displayText = isUppercase ? text.toUpperCase() : text;
+      
+        const selector = blockId 
+          ? `${blockId} .${className}`  
+          : `.${className}`;
+      
+        const css = `<style>
+      ${selector} {
+        background: ${gradient};
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: ${fontSize}${fontUnit};
+        font-weight: ${fontWeight};
+        text-align: ${textAlign};${isItalic ? '\n  font-style: italic;' : ''}${isUppercase ? '\n  text-transform: uppercase;' : ''}
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }</style>`;
+      
+        const html = `<${textElement} class="${className}">${displayText}</${textElement}>`;
+      
+        document.getElementById('gtg-output').value = 
+          document.querySelector('.gtg-tab-button.active').innerText.includes('CSS') ? css : html;
+      }
+    
+    // Initialize event listeners
+    function initializeEventListeners() {
+        // Add null checks
+        const angleSlider = document.getElementById('gtg-angle-slider');
+        const angleInput = document.getElementById('gtg-angle-input');
+        
+        if (angleSlider && angleInput) {
+            angleSlider.addEventListener('input', (e) => {
+                angleInput.value = e.target.value;
+                updatePreview();
+            });
+
+            angleInput.addEventListener('input', (e) => {
+                const value = Math.min(360, Math.max(0, e.target.value));
+                angleSlider.value = value;
+                updatePreview();
+            });
+        }
+
+        // Add other event listeners with null checks
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            if (input) {
+                input.addEventListener('input', updatePreview);
+            }
+        });
+    }
+
+
+function initColorPicker(colorId) {
+    const picker = document.getElementById(colorId);
+    const text = document.getElementById(`${colorId}-text`);
+    const preview = document.getElementById(`${colorId}-preview`);
+    
+    // Clear defaults for optional colors (3, 4, and 5)
+    if (colorId.match(/color[3-5]/)) {
+        text.value = '';
+        preview.style.backgroundColor = 'transparent';
+    }
+
+    // Initialize with validation only for required colors (1 and 2)
+    if (colorId.match(/color[1-2]/)) {
+        const initialValidation = validateAndFormatColor(picker.value);
+        if (initialValidation.isValid) {
+            text.value = initialValidation.formattedColor;
+            preview.style.backgroundColor = initialValidation.formattedColor;
+        }
+    }
+
+    // Rest of the event listeners remain the same
+    picker.addEventListener('input', (e) => {
+        const { isValid, formattedColor } = validateAndFormatColor(e.target.value);
+        if (isValid) {
+            text.value = formattedColor;
+            preview.style.backgroundColor = formattedColor;
+            text.style.borderColor = '#444';
+            updatePreview();
+        }
+    });
+      
+        text.addEventListener('input', (e) => {
+          const { isValid, formattedColor } = validateAndFormatColor(e.target.value);
+          if (isValid || e.target.value.length === 0) {  // Allow empty input
+            if (isValid) {
+              picker.value = formattedColor;
+              preview.style.backgroundColor = formattedColor;
+              text.value = formattedColor;
+              text.style.borderColor = '#444';
+            } else {
+              // If empty, clear the preview
+              preview.style.backgroundColor = 'transparent';
+            }
+            updatePreview();
+          } else {
+            text.style.borderColor = '#ff4d4d';
+            const testWithHash = validateAndFormatColor('#' + e.target.value);
+            if (testWithHash.isValid) {
+              preview.style.backgroundColor = testWithHash.formattedColor;
+              updatePreview();
+            }
+          }
+        });
+      
+        text.addEventListener('blur', (e) => {
+          if (e.target.value.length > 0) {
+            const { isValid, formattedColor } = validateAndFormatColor(e.target.value);
+            if (isValid) {
+              text.value = formattedColor;
+              picker.value = formattedColor;
+              preview.style.backgroundColor = formattedColor;
+              text.style.borderColor = '#444';
+              updatePreview();
+            }
+          } else {
+            // If empty after blur, ensure preview is cleared
+            preview.style.backgroundColor = 'transparent';
+            updatePreview();
+          }
+        });
+      }
+    
+      
+    // Initialize
+    function initializeWidget() {
+        // Event listeners
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', updatePreview);
+        });
+        
+        // Synchronize angle inputs
+        document.getElementById('gtg-angle-slider').addEventListener('input', (e) => {
+            document.getElementById('gtg-angle-input').value = e.target.value;
+            updatePreview();
+        });
+        
+        document.getElementById('gtg-angle-input').addEventListener('input', (e) => {
+            const value = Math.min(360, Math.max(0, e.target.value));
+            document.getElementById('gtg-angle-slider').value = value;
+            updatePreview();
+        });
+
+        // Initialize color pickers
+        for (let i = 1; i <= 5; i++) {
+            initColorPicker(`color${i}`);
+        }
+        updatePreview();
+    }
+
+    function initGradientGenerator(targetId) {
         console.log('Initializing widget...');
         const target = document.getElementById(targetId);
         if (!target) {
@@ -214,253 +460,12 @@ try {
         }
     }
 
-    // Initialize event listeners
-    function initializeEventListeners() {
-        // Add null checks
-        const angleSlider = document.getElementById('gtg-angle-slider');
-        const angleInput = document.getElementById('gtg-angle-input');
-        
-        if (angleSlider && angleInput) {
-            angleSlider.addEventListener('input', (e) => {
-                angleInput.value = e.target.value;
-                updatePreview();
-            });
 
-            angleInput.addEventListener('input', (e) => {
-                const value = Math.min(360, Math.max(0, e.target.value));
-                angleSlider.value = value;
-                updatePreview();
-            });
-        }
-
-        // Add other event listeners with null checks
-        const inputs = document.querySelectorAll('input, select');
-        inputs.forEach(input => {
-            if (input) {
-                input.addEventListener('input', updatePreview);
-            }
-        });
-    }
-
-function validateAndFormatColor(value) {
-    // Remove spaces and any non-alphanumeric characters except #
-    let color = value.trim().replace(/[^0-9A-Fa-f#]/g, '');
-    
-    // If there's no #, add it at the beginning
-    if (!color.startsWith('#')) {
-        color = '#' + color;
-    }
-    
-    // Remove any extra # symbols after the first one
-    color = '#' + color.slice(1).replace(/#/g, '');
-    
-    // Check if it's a valid 6-digit hex color
-    const isValid = /^#[0-9A-Fa-f]{6}$/.test(color);
-    
-    return { isValid, formattedColor: color };
-}
-
-function initColorPicker(colorId) {
-    const picker = document.getElementById(colorId);
-    const text = document.getElementById(`${colorId}-text`);
-    const preview = document.getElementById(`${colorId}-preview`);
-    
-    // Clear defaults for optional colors (3, 4, and 5)
-    if (colorId.match(/color[3-5]/)) {
-        text.value = '';
-        preview.style.backgroundColor = 'transparent';
-    }
-
-    // Initialize with validation only for required colors (1 and 2)
-    if (colorId.match(/color[1-2]/)) {
-        const initialValidation = validateAndFormatColor(picker.value);
-        if (initialValidation.isValid) {
-            text.value = initialValidation.formattedColor;
-            preview.style.backgroundColor = initialValidation.formattedColor;
-        }
-    }
-
-    // Rest of the event listeners remain the same
-    picker.addEventListener('input', (e) => {
-        const { isValid, formattedColor } = validateAndFormatColor(e.target.value);
-        if (isValid) {
-            text.value = formattedColor;
-            preview.style.backgroundColor = formattedColor;
-            text.style.borderColor = '#444';
-            updatePreview();
-        }
-    });
-      
-        text.addEventListener('input', (e) => {
-          const { isValid, formattedColor } = validateAndFormatColor(e.target.value);
-          if (isValid || e.target.value.length === 0) {  // Allow empty input
-            if (isValid) {
-              picker.value = formattedColor;
-              preview.style.backgroundColor = formattedColor;
-              text.value = formattedColor;
-              text.style.borderColor = '#444';
-            } else {
-              // If empty, clear the preview
-              preview.style.backgroundColor = 'transparent';
-            }
-            updatePreview();
-          } else {
-            text.style.borderColor = '#ff4d4d';
-            const testWithHash = validateAndFormatColor('#' + e.target.value);
-            if (testWithHash.isValid) {
-              preview.style.backgroundColor = testWithHash.formattedColor;
-              updatePreview();
-            }
-          }
-        });
-      
-        text.addEventListener('blur', (e) => {
-          if (e.target.value.length > 0) {
-            const { isValid, formattedColor } = validateAndFormatColor(e.target.value);
-            if (isValid) {
-              text.value = formattedColor;
-              picker.value = formattedColor;
-              preview.style.backgroundColor = formattedColor;
-              text.style.borderColor = '#444';
-              updatePreview();
-            }
-          } else {
-            // If empty after blur, ensure preview is cleared
-            preview.style.backgroundColor = 'transparent';
-            updatePreview();
-          }
-        });
-      }
-      
-      // Update getActiveColors function to use validation
-      function getActiveColors() {
-        const colors = [];
-        for (let i = 1; i <= 5; i++) {
-          const colorInput = document.getElementById(`color${i}-text`);
-          if (colorInput && colorInput.value.trim() !== '') {  // Only check if input has a value
-            const { isValid, formattedColor } = validateAndFormatColor(colorInput.value);
-            if (isValid) {
-              colors.push(formattedColor);
-            }
-          }
-        }
-        return colors.length > 0 ? colors : ['#FF5F6D', '#FFC371']; // Default colors if none are valid
-      }
-      
-      function updatePreview() {
-        const text = document.getElementById('gtg-text').value;
-        const textElement = document.getElementById('gtg-text-element').value;
-        const textAlign = document.getElementById('gtg-text-align').value;
-        const fontSize = document.getElementById('gtg-font-size').value;
-        const fontUnit = document.getElementById('gtg-font-unit').value;
-        const fontWeight = document.getElementById('gtg-font-weight').value;
-        const isItalic = document.getElementById('gtg-italic').checked;
-        const isUppercase = document.getElementById('gtg-uppercase').checked;
-        const gradientType = document.querySelector('input[name="gradientType"]:checked').value;
-        const angle = document.getElementById('gtg-angle-slider').value;
-        const colors = getActiveColors();
-      
-        const gradient = gradientType === 'linear'
-          ? `linear-gradient(${angle}deg, ${colors.join(', ')})`
-          : `radial-gradient(circle at center, ${colors.join(', ')})`;
-      
-        const displayText = isUppercase ? text.toUpperCase() : text;
-      
-        const preview = document.getElementById('gtg-preview');
-        preview.innerHTML = `<${textElement} style="
-          background: ${gradient};
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          font-size: ${fontSize}${fontUnit};
-          font-weight: ${fontWeight};
-          font-style: ${isItalic ? 'italic' : 'normal'};
-          text-transform: ${isUppercase ? 'uppercase' : 'none'};
-          text-align: ${textAlign};
-          margin: 0;
-          padding: 0;
-          width: 100%;
-        ">${displayText}</${textElement}>`;
-      
-        generateCode();
-      }
-      
-      // Update the generateCode function
-      function generateCode() {
-        const text = document.getElementById('gtg-text').value;
-        const blockId = document.getElementById('gtg-block-id').value.trim();
-        const textElement = document.getElementById('gtg-text-element').value;
-        const textAlign = document.getElementById('gtg-text-align').value;
-        const fontSize = document.getElementById('gtg-font-size').value;
-        const fontUnit = document.getElementById('gtg-font-unit').value;
-        const fontWeight = document.getElementById('gtg-font-weight').value;
-        const isItalic = document.getElementById('gtg-italic').checked;
-        const isUppercase = document.getElementById('gtg-uppercase').checked;
-        const gradientType = document.querySelector('input[name="gradientType"]:checked').value;
-        const angle = document.getElementById('gtg-angle-slider').value;
-        const colors = getActiveColors();
-      
-        const className = `gradient-text-${text.toLowerCase().replace(/\s+/g, '-')}`;
-        const gradient = gradientType === 'linear'
-          ? `linear-gradient(${angle}deg, ${colors.join(', ')})`
-          : `radial-gradient(circle at center, ${colors.join(', ')})`;
-      
-        const displayText = isUppercase ? text.toUpperCase() : text;
-      
-        const selector = blockId 
-          ? `${blockId} .${className}`  
-          : `.${className}`;
-      
-        const css = `<style>
-      ${selector} {
-        background: ${gradient};
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: ${fontSize}${fontUnit};
-        font-weight: ${fontWeight};
-        text-align: ${textAlign};${isItalic ? '\n  font-style: italic;' : ''}${isUppercase ? '\n  text-transform: uppercase;' : ''}
-        display: inline-block;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }</style>`;
-      
-        const html = `<${textElement} class="${className}">${displayText}</${textElement}>`;
-      
-        document.getElementById('gtg-output').value = 
-          document.querySelector('.gtg-tab-button.active').innerText.includes('CSS') ? css : html;
-      }
-      
-
-      
-    // Initialize
-    function initializeWidget() {
-        // Event listeners
-        document.querySelectorAll('input, select').forEach(input => {
-            input.addEventListener('input', updatePreview);
-        });
-        
-        // Synchronize angle inputs
-        document.getElementById('gtg-angle-slider').addEventListener('input', (e) => {
-            document.getElementById('gtg-angle-input').value = e.target.value;
-            updatePreview();
-        });
-        
-        document.getElementById('gtg-angle-input').addEventListener('input', (e) => {
-            const value = Math.min(360, Math.max(0, e.target.value));
-            document.getElementById('gtg-angle-slider').value = value;
-            updatePreview();
-        });
-
-        // Initialize color pickers
-        for (let i = 1; i <= 5; i++) {
-            initColorPicker(`color${i}`);
-        }
-        updatePreview();
-    }
-
-    // Make initialization function globally available
+    // Expose necessary functions to global scope
+    window.switchTab = switchTab;
+    window.copyToClipboard = copyToClipboard;
     window.initGradientGenerator = initGradientGenerator;
+    
+    // Log initialization
     console.log('Widget loaded: initGradientGenerator available:', !!window.initGradientGenerator);
-})();  
+})();

@@ -66,50 +66,50 @@
     }
 
     function generateCode() {
-        const text = document.getElementById('gtg-text').value;
-        const blockId = document.getElementById('gtg-block-id').value.trim();
-        const textElement = document.getElementById('gtg-text-element').value;
-        const textAlign = document.getElementById('gtg-text-align').value;
-        const fontSize = document.getElementById('gtg-font-size').value;
-        const fontUnit = document.getElementById('gtg-font-unit').value;
-        const fontWeight = document.getElementById('gtg-font-weight').value;
-        const isItalic = document.getElementById('gtg-italic').checked;
-        const isUppercase = document.getElementById('gtg-uppercase').checked;
-        const gradientType = document.querySelector('input[name="gradientType"]:checked').value;
-        const angle = document.getElementById('gtg-angle-slider').value;
-        const colors = getActiveColors();
-      
-        const className = `gradient-text-${text.toLowerCase().replace(/\s+/g, '-')}`;
-        const gradient = gradientType === 'linear'
-          ? `linear-gradient(${angle}deg, ${colors.join(', ')})`
-          : `radial-gradient(circle at center, ${colors.join(', ')})`;
-      
-        const displayText = isUppercase ? text.toUpperCase() : text;
-      
-        const selector = blockId 
-          ? `${blockId} .${className}`  
-          : `.${className}`;
-      
-        const css = `<style>
-      ${selector} {
-        background: ${gradient};
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: ${fontSize}${fontUnit};
-        font-weight: ${fontWeight};
-        text-align: ${textAlign};${isItalic ? '\n  font-style: italic;' : ''}${isUppercase ? '\n  text-transform: uppercase;' : ''}
-        display: inline-block;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }</style>`;
-      
-        const  = `<${textElement} class="${className}">${displayText}</${textElement}>`;
-      
-        document.getElementById('gtg-output').value = 
-          document.querySelector('.gtg-tab-button.active').innerText.includes('CSS') ? css : ;
-    }
+    const text = document.getElementById('gtg-text').value;
+    const blockId = document.getElementById('gtg-block-id').value.trim();
+    const textElement = document.getElementById('gtg-text-element').value;
+    const textAlign = document.getElementById('gtg-text-align').value;
+    const fontSize = document.getElementById('gtg-font-size').value;
+    const fontUnit = document.getElementById('gtg-font-unit').value;
+    const fontWeight = document.getElementById('gtg-font-weight').value;
+    const isItalic = document.getElementById('gtg-italic').checked;
+    const isUppercase = document.getElementById('gtg-uppercase').checked;
+    const gradientType = document.querySelector('input[name="gradientType"]:checked').value;
+    const angle = document.getElementById('gtg-angle-slider').value;
+    const colors = getActiveColors();
+  
+    const className = `gradient-text-${text.toLowerCase().replace(/\s+/g, '-')}`;
+    const gradient = gradientType === 'linear'
+      ? `linear-gradient(${angle}deg, ${colors.join(', ')})`
+      : `radial-gradient(circle at center, ${colors.join(', ')})`;
+  
+    const displayText = isUppercase ? text.toUpperCase() : text;
+  
+    const selector = blockId 
+      ? `${blockId} .${className}`  
+      : `.${className}`;
+  
+    const css = `<style>
+  ${selector} {
+    background: ${gradient};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: ${fontSize}${fontUnit};
+    font-weight: ${fontWeight};
+    text-align: ${textAlign};${isItalic ? '\n  font-style: italic;' : ''}${isUppercase ? '\n  text-transform: uppercase;' : ''}
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }</style>`;
+  
+    const html = `<${textElement} class="${className}">${displayText}</${textElement}>`;
+  
+    document.getElementById('gtg-output').value = 
+      document.querySelector('.gtg-tab-button.active').innerText.includes('CSS') ? css : html;
+}
 
     function initializeEventListeners() {
         const angleSlider = document.getElementById('gtg-angle-slider');

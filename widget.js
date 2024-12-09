@@ -1,14 +1,22 @@
 (function() {
-    // Expose functions to global scope
-    window.switchTab = function(tab, event) {
+    // Expose necessary functions to global scope
+    window.generateCode = generateCode;
+    window.switchTab = switchTab;
+    window.copyToClipboard = copyToClipboard;
+    window.initGradientGenerator = initGradientGenerator;
+
+    // Generate unique widget ID
+    const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
+    
+    function switchTab(tab, event) {
         document.querySelectorAll('.gtg-tab-button').forEach(button => {
             button.classList.remove('active');
         });
         event.target.classList.add('active');
         generateCode();
-    };
+    }
 
-    window.copyToClipboard = async function() {
+    async function copyToClipboard() {
         const output = document.getElementById('gtg-output');
         try {
             await navigator.clipboard.writeText(output.value);
@@ -19,17 +27,13 @@
             }, 2000);
         } catch (err) {
             console.error('Failed to copy:', err);
-            // Fallback for browsers that don't support clipboard API
+            // Fallback
             output.select();
             document.execCommand('copy');
         }
-    };
+    }
 
-(function() {
-    // Generate unique widget ID
-    const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
-    
-    function initGradientGenerator(targetId) {
+function initGradientGenerator(targetId) {
         console.log('Initializing widget...');
         const target = document.getElementById(targetId);
         if (!target) {
@@ -179,7 +183,7 @@
                   <div class="gtg-tabs">
                     <div class="gtg-tab-buttons">
 <button class="gtg-tab-button active" onclick="switchTab('css', event)">CSS Code</button>
-<button class="gtg-tab-button" onclick="switchTab('html', event)">HTML Code</button>
+<button class="gtg-tab-button" onclick="Tab('html', event)">HTML Code</button>
                     </div>
                     <textarea id="gtg-output" class="gtg-output" readonly></textarea>
                   </div>
@@ -428,29 +432,7 @@ function initColorPicker(colorId) {
           document.querySelector('.gtg-tab-button.active').innerText.includes('CSS') ? css : html;
       }
       
-// Update the switchTab function to accept the event parameter
-function switchTab(tab, event) {
-  document.querySelectorAll('.gtg-tab-button').forEach(button => {
-    button.classList.remove('active');
-  });
-  event.target.classList.add('active');
-  generateCode();
-}
 
-// Update the copyToClipboard function to use the modern Clipboard API
-async function copyToClipboard() {
-  const output = document.getElementById('gtg-output');
-  try {
-    await navigator.clipboard.writeText(output.value);
-    // Optional: Add visual feedback
-    const copyButton = document.querySelector('.gtg-copy-button');
-    copyButton.textContent = 'Copied!';
-    setTimeout(() => {
-      copyButton.textContent = 'Copy Code';
-    }, 2000);
-  } catch (err) {
-    console.error('Failed to copy:', err);
-  }
       
     // Initialize
     function initializeWidget() {

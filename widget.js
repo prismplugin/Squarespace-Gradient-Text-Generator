@@ -423,7 +423,7 @@
     window.copyToClipboard = copyToClipboard;
     
     console.log('Widget loaded: initGradientGenerator available:', !!window.initGradientGenerator);
-}();
+})();
         
         
 

@@ -465,7 +465,6 @@
         }
     }
 
-    // Make functions globally available
     window.initGradientGenerator = initGradientGenerator;
     window.switchTab = switchTab;
     window.copyToClipboard = copyToClipboard;

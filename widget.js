@@ -89,9 +89,7 @@
 
     // Generate unique widget ID
     const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
-
-    // Continue with the rest of your code...
-})();
+    
 function validateAndFormatColor(value) {
     // Remove spaces and any non-alphanumeric characters except #
     let color = value.trim().replace(/[^0-9A-Fa-f#]/g, '');

@@ -10,23 +10,25 @@
 <body>
     <div id="gradient-text-generator"></div>
 
-    <!-- Debug loading -->
-    <script>console.log('Before widget.js load');</script>
-    
     <script src="widget.js"></script>
-    
     <script>
-        console.log('After widget.js load, initGradientGenerator:', typeof initGradientGenerator);
-        
-        window.addEventListener('load', function() {
-            console.log('Window loaded, checking widget...');
-            if (typeof initGradientGenerator === 'undefined') {
-                console.error('Widget script not loaded properly');
-                // Check if widget.js loaded at all
-                console.log('Script status:', document.querySelector('script[src="widget.js"]').readyState);
+        // Wait for both DOM and script to load
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, waiting for widget...');
+            
+            // Try to initialize immediately if script is already loaded
+            if (typeof window.initGradientGenerator === 'function') {
+                window.initGradientGenerator('gradient-text-generator');
             } else {
-                console.log('Found initGradientGenerator, initializing...');
-                initGradientGenerator('gradient-text-generator');
+                // If not loaded, wait a bit and try again
+                setTimeout(() => {
+                    console.log('Retrying initialization...');
+                    if (typeof window.initGradientGenerator === 'function') {
+                        window.initGradientGenerator('gradient-text-generator');
+                    } else {
+                        console.error('Widget failed to load after delay');
+                    }
+                }, 1000);
             }
         });
     </script>

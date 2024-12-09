@@ -1,4 +1,31 @@
 (function() {
+    // Expose functions to global scope
+    window.switchTab = function(tab, event) {
+        document.querySelectorAll('.gtg-tab-button').forEach(button => {
+            button.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        generateCode();
+    };
+
+    window.copyToClipboard = async function() {
+        const output = document.getElementById('gtg-output');
+        try {
+            await navigator.clipboard.writeText(output.value);
+            const copyButton = document.querySelector('.gtg-copy-button');
+            copyButton.textContent = 'Copied!';
+            setTimeout(() => {
+                copyButton.textContent = 'Copy Code';
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+            // Fallback for browsers that don't support clipboard API
+            output.select();
+            document.execCommand('copy');
+        }
+    };
+
+(function() {
     // Generate unique widget ID
     const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
     

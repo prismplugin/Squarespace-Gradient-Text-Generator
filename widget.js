@@ -1,6 +1,6 @@
 (function() {
     // First declare generateCode function to avoid hoisting issues
-    generateCode = function() {
+    function generateCode() {
         console.log('Generating code...');
         const text = document.getElementById('gtg-text').value;
         const blockId = document.getElementById('gtg-block-id').value.trim();
@@ -48,9 +48,9 @@
         console.log('Active tab:', activeTab?.innerText);
         
         output.value = activeTab?.innerText.includes('CSS') ? css : html;
-    };
+    }
 
-    // Make generateCode globally available
+    // Make functions globally available
     window.generateCode = generateCode;
 
     // Update the switchTab function with debugging
@@ -70,20 +70,8 @@
             console.error('No event target found');
         }
     };
-(function() {
-    // First, declare all functions that need to be globally accessible
-    let generateCode;  // Declare here to be used in other functions
 
-    // Define functions that need to be exposed globally
-    function switchTab(tab, event) {
-        document.querySelectorAll('.gtg-tab-button').forEach(button => {
-            button.classList.remove('active');
-        });
-        event.target.classList.add('active');
-        generateCode();  // This will be defined later
-    }
-
-    async function copyToClipboard() {
+    window.copyToClipboard = async function() {
         const output = document.getElementById('gtg-output');
         try {
             await navigator.clipboard.writeText(output.value);
@@ -94,15 +82,16 @@
             }, 2000);
         } catch (err) {
             console.error('Failed to copy:', err);
-            // Fallback
             output.select();
             document.execCommand('copy');
         }
-    }
+    };
 
     // Generate unique widget ID
     const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
 
+    // Continue with the rest of your code...
+})();
 function validateAndFormatColor(value) {
     // Remove spaces and any non-alphanumeric characters except #
     let color = value.trim().replace(/[^0-9A-Fa-f#]/g, '');

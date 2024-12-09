@@ -425,14 +425,14 @@ function initColorPicker(colorId) {
               </div>
               
                   <div class="gtg-preview" id="gtg-preview"></div>
-              
-                  <div class="gtg-tabs">
-                    <div class="gtg-tab-buttons">
-<button class="gtg-tab-button active" onclick="switchTab('css', event)">CSS Code</button>
-<button class="gtg-tab-button" onclick="Tab('html', event)">HTML Code</button>
-                    </div>
-                    <textarea id="gtg-output" class="gtg-output" readonly></textarea>
-                  </div>
+            
+<div class="gtg-tabs">
+    <div class="gtg-tab-buttons">
+        <button class="gtg-tab-button active" onclick="switchTab('css', event)">CSS Code</button>
+        <button class="gtg-tab-button" onclick="switchTab('html', event)">HTML Code</button>
+    </div>
+    <textarea id="gtg-output" class="gtg-output" readonly></textarea>
+</div>
               
                  
                 <div class="gtg-button-row">

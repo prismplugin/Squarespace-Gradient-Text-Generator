@@ -113,7 +113,6 @@
         generateCode();
     }
 
-    generateCode = function() {
     function generateCode() {
     const text = document.getElementById('gtg-text').value;
     const blockId = document.getElementById('gtg-block-id').value.trim();

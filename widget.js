@@ -1,7 +1,12 @@
-(function() {
+;(function() {
+    'use strict';
+    
     // Generate unique widget ID
     const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
 
+    // Declare generateCode at the top level of our IIFE
+    let generateCode;
+    
     // First declare all functions we'll need
     function validateAndFormatColor(value) {
         let color = value.trim().replace(/[^0-9A-Fa-f#]/g, '');
@@ -65,6 +70,7 @@
         generateCode();
     }
 
+    generateCode = function() {
     function generateCode() {
     const text = document.getElementById('gtg-text').value;
     const blockId = document.getElementById('gtg-block-id').value.trim();

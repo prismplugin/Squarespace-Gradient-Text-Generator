@@ -9,26 +9,11 @@
 </head>
 <body>
     <div id="gradient-text-generator"></div>
-
     <script src="widget.js"></script>
     <script>
-        // Wait for both DOM and script to load
-        window.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, waiting for widget...');
-            
-            // Try to initialize immediately if script is already loaded
+        document.addEventListener('DOMContentLoaded', function() {
             if (typeof window.initGradientGenerator === 'function') {
                 window.initGradientGenerator('gradient-text-generator');
-            } else {
-                // If not loaded, wait a bit and try again
-                setTimeout(() => {
-                    console.log('Retrying initialization...');
-                    if (typeof window.initGradientGenerator === 'function') {
-                        window.initGradientGenerator('gradient-text-generator');
-                    } else {
-                        console.error('Widget failed to load after delay');
-                    }
-                }, 1000);
             }
         });
     </script>

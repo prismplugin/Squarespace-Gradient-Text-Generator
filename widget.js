@@ -1,4 +1,76 @@
 (function() {
+    // First declare generateCode function to avoid hoisting issues
+    generateCode = function() {
+        console.log('Generating code...');
+        const text = document.getElementById('gtg-text').value;
+        const blockId = document.getElementById('gtg-block-id').value.trim();
+        const textElement = document.getElementById('gtg-text-element').value;
+        const textAlign = document.getElementById('gtg-text-align').value;
+        const fontSize = document.getElementById('gtg-font-size').value;
+        const fontUnit = document.getElementById('gtg-font-unit').value;
+        const fontWeight = document.getElementById('gtg-font-weight').value;
+        const isItalic = document.getElementById('gtg-italic').checked;
+        const isUppercase = document.getElementById('gtg-uppercase').checked;
+        const gradientType = document.querySelector('input[name="gradientType"]:checked').value;
+        const angle = document.getElementById('gtg-angle-slider').value;
+        const colors = getActiveColors();
+      
+        const className = `gradient-text-${text.toLowerCase().replace(/\s+/g, '-')}`;
+        const gradient = gradientType === 'linear'
+          ? `linear-gradient(${angle}deg, ${colors.join(', ')})`
+          : `radial-gradient(circle at center, ${colors.join(', ')})`;
+      
+        const displayText = isUppercase ? text.toUpperCase() : text;
+      
+        const selector = blockId 
+          ? `${blockId} .${className}`  
+          : `.${className}`;
+      
+        const css = `<style>
+      ${selector} {
+        background: ${gradient};
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: ${fontSize}${fontUnit};
+        font-weight: ${fontWeight};
+        text-align: ${textAlign};${isItalic ? '\n  font-style: italic;' : ''}${isUppercase ? '\n  text-transform: uppercase;' : ''}
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }</style>`;
+      
+        const html = `<${textElement} class="${className}">${displayText}</${textElement}>`;
+      
+        const output = document.getElementById('gtg-output');
+        const activeTab = document.querySelector('.gtg-tab-button.active');
+        console.log('Active tab:', activeTab?.innerText);
+        
+        output.value = activeTab?.innerText.includes('CSS') ? css : html;
+    };
+
+    // Make generateCode globally available
+    window.generateCode = generateCode;
+
+    // Update the switchTab function with debugging
+    window.switchTab = function(tab, event) {
+        console.log('Switching to tab:', tab);
+        console.log('Event:', event);
+        
+        const buttons = document.querySelectorAll('.gtg-tab-button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+        });
+        
+        if (event && event.target) {
+            event.target.classList.add('active');
+            generateCode();
+        } else {
+            console.error('No event target found');
+        }
+    };
+(function() {
     // First, declare all functions that need to be globally accessible
     let generateCode;  // Declare here to be used in other functions
 
@@ -280,15 +352,16 @@ function initColorPicker(colorId) {
     }
 
     function initGradientGenerator(targetId) {
-        console.log('Initializing widget...');
-        const target = document.getElementById(targetId);
-        if (!target) {
-            console.error('Target element not found:', targetId);
-            return;
-        }
-        
-        const widget = document.createElement('div');
-        widget.id = widgetId;
+    console.log('Initializing widget...');
+    const target = document.getElementById(targetId);
+    if (!target) {
+        console.error('Target element not found:', targetId);
+        return;
+    }
+    
+    const widget = document.createElement('div');
+    widget.id = widgetId;
+    widget.innerHTML = `
         widget.innerHTML = `
             <div class="gtg-main-content">
                 <h2 class="gtg-tool-title">Gradient Text Generator</h2>
@@ -433,33 +506,37 @@ function initColorPicker(colorId) {
     </div>
     <textarea id="gtg-output" class="gtg-output" readonly></textarea>
 </div>
-              
-                 
-                <div class="gtg-button-row">
+    <div class="gtg-button-row">
                     <button onclick="copyToClipboard()" class="gtg-action-button gtg-copy-button">Copy Code</button>
                 </div>
             </div>
-        `;  // Close the template literal
-        
-        target.appendChild(widget);
-        
-try {
-            console.log('Setting up event listeners...');
-            initializeEventListeners();
-            // Change this line to use the correct function name
-            initColorPicker('color1'); // Initialize first color
-            initColorPicker('color2'); // Initialize second color
-            // Initialize optional colors
-            for (let i = 3; i <= 5; i++) {
-                initColorPicker(`color${i}`);
-            }
-            updatePreview();
-            console.log('Widget initialized successfully');
-        } catch (error) {
-            console.error('Error initializing widget:', error);
-        }
-    }
+    `;  
+    
+    target.appendChild(widget);
+    
+    try {
+        console.log('Setting up event listeners...');
+        // Add tab button event listeners AFTER widget is created
+        const tabButtons = document.querySelectorAll('.gtg-tab-button');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const tab = e.target.innerText.toLowerCase().includes('css') ? 'css' : 'html';
+                switchTab(tab, e);
+            });
+        });
 
+        initializeEventListeners();
+        initColorPicker('color1');
+        initColorPicker('color2');
+        for (let i = 3; i <= 5; i++) {
+            initColorPicker(`color${i}`);
+        }
+        updatePreview();
+        console.log('Widget initialized successfully');
+    } catch (error) {
+        console.error('Error initializing widget:', error);
+    }
+}
 
     // Expose necessary functions to global scope
     window.switchTab = switchTab;

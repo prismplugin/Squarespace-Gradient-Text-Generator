@@ -239,7 +239,7 @@
         widget.id = widgetId;
         widget.innerHTML = `
     <div class="gtg-main-content">
-        <h2 class="gtg-tool-title">Gradient Text Generator</h2>
+        <h2 class="gtg-tool-title">Gradient Text Generator for Squarespace</h2>
         <div class="gtg-compact-group">
             <div class="gtg-input-group" style="flex: 1;">
                 <label class="gtg-input-label">Text Content</label>

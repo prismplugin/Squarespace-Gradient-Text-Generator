@@ -3,347 +3,135 @@ body {
     margin: 0;
     padding: 20px;
     font-family: 'Noto Sans', Arial, sans-serif;
+    background: #2b2b2b;
 }
 
 /* Base Container */
 #gradient-text-generator {
-  max-width: 600px;
-  margin: 10px auto !important;
-  padding: 10px;
-  font-family: 'Noto Sans', Arial, sans-serif !important;
-  color: #e0e0e0;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
+    max-width: 400px !important;
+    margin: 10px !important;
+    padding: 10px !important;
+    font-family: 'Noto Sans', Arial, sans-serif !important;
+    color: #e0e0e0;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
 }
 
 #gradient-text-generator * {
-  font-family: 'Noto Sans', Arial, sans-serif !important;
-}
-
-/* Container for the angle controls */
-#gtg-angle-control .gtg-input-field[type="range"] {
-  width: 200px !important;
-  flex: none !important;
-}
-
-#gtg-angle-control .gtg-input-field[type="number"] {
-  width: 70px !important;
-  flex: none !important;
-}
-
-#gtg-angle-control div {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-}
-
-/* Style the degree symbol/text */
-#gtg-angle-control span {
-  color: #e0e0e0 !important;
-  font-size: 14px !important;
-  width: auto !important;
-  flex: none !important;
+    font-family: 'Noto Sans', Arial, sans-serif !important;
 }
 
 .gtg-main-content {
-  background-color: #1a1a1a !important;
-  padding: 20px !important; /* Increased padding */
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-  width: 100% !important;
+    background-color: #1a1a1a !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
 .gtg-tool-title {
-  color: #fff !important;
-  text-align: center !important;
-  font-size: 20px !important;
-  font-weight: 600 !important;
-  margin-bottom: 24px !important;
-  line-height: 1.4 !important;
+    color: #fff !important;
+    text-align: center !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    margin-bottom: 16px !important;
 }
 
 /* Input Controls */
-.gtg-input-group {
-  margin-bottom: 12px !important;
-  padding: 0 !important;
-}
-
 .gtg-input-label {
-  display: block !important;
-  color: #b3b3b3 !important;
-  margin-bottom: 8px !important;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-  padding: 0 !important;
-}
-
-.gtg-compact-group {
-  display: flex !important;
-  gap: 16px !important;
-  margin-bottom: 16px !important;
-}
-
-/* Compact spacing between sections */
-.gtg-compact-group {
-  gap: 10px !important; /* Reduced from 16px */
-  margin-bottom: 12px !important; /* Reduced from 16px */
-}
-
-/* Fix text content and block ID spacing */
-.gtg-compact-group .gtg-input-group {
-  margin-bottom: 0 !important;
-  min-width: 0 !important; /* Allows proper shrinking */
+    display: block !important;
+    color: #b3b3b3 !important;
+    margin-bottom: 4px !important;
+    font-size: 12px !important;
 }
 
 .gtg-input-field {
-  width: 100% !important;
-  min-width: 0 !important; /* Allows fields to shrink */
-  padding: 8px !important;
-  background-color: #2b2b2b !important;
-  border: 1px solid #444 !important;
-  border-radius: 4px !important;
-  color: #e0e0e0 !important;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-  height: auto !important;
-  margin: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 6px 8px !important;
+    background-color: #2b2b2b !important;
+    border: 1px solid #444 !important;
+    border-radius: 4px !important;
+    color: #e0e0e0 !important;
+    font-size: 12px !important;
 }
 
-/* Add these to your existing CSS */
-.gtg-preview h1,
-.gtg-preview h2,
-.gtg-preview h3,
-.gtg-preview h4,
-.gtg-preview p {
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1.2 !important;
-  width: 100% !important;
-}
+  .gtg-radio-group {
+    width: 100% !important;
+    justify-content: space-between !important;
+      height: 0px !important;
+  }
 
-/* Ensure preview area can handle larger text */
-.gtg-preview {
-  margin: 16px 0 !important;
-    min-height: 120px !important;
-  padding: 20px !important;
-  overflow: hidden !important;
-}
-
-/* Style fixes for radio and checkbox inputs */
-.gtg-input-group label {
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.gtg-checkbox-label {
-  font-size: 14px !important;
-  color: #e0e0e0 !important;
-  display: flex !important;
-  align-items: center !important;
-  margin: 0 !important;
-  padding: 8px !important;
-  background: #2b2b2b !important;
-  border: 1px solid #444 !important;
-  border-radius: 4px !important;
-}
-
-/* Adjust font size input container */
-.gtg-input-group div[style*="display: flex"] {
-  gap: 4px !important; /* Reduced gap */
-}
-
-/* Adjust checkbox container */
-.gtg-checkbox-label {
-  padding: 6px 8px !important; /* Reduced padding */
-}
-
-input[type="radio"],
-input[type="checkbox"] {
-  margin: 0 8px 0 0 !important;
-  padding: 0 !important;
-  height: auto !important;
-  width: auto !important;
-}
-
-/* Color Input Styles */
-.gtg-color-input-group {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  margin-bottom: 16px !important;
+/* Color picker specific styles */
+input[type="color"] {
+    width: 40px !important;
+    height: 32px !important;
+    padding: 0 2px !important;
+    background: #2b2b2b !important;
 }
 
 .gtg-color-preview {
-  width: 36px !important;
-  height: 36px !important;
-  border-radius: 4px !important;
-  border: 1px solid #444 !important;
-}
-
-.gtg-color-inputs {
-  border-top: 1px solid #444 !important;
-  border-bottom: 1px solid #444 !important;
-  padding: 16px 0 !important;
-  margin: 16px 0 !important;
-}
-
-.gtg-color-input-group:last-child {
-  margin-bottom: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 4px !important;
+    border: 1px solid #444 !important;
 }
 
 /* Preview Area */
 .gtg-preview {
-  margin: 20px 0 !important;
-  padding: 40px 20px !important;
-  background: #2b2b2b !important;
-  border-radius: 4px !important;
-  text-align: center !important;
-  min-height: 160px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  overflow: visible !important;
+    background: #2b2b2b !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-.gtg-preview > div {
-  max-width: 100% !important;
-  word-break: break-word !important;
-  padding: 0.1em 0 !important;
-  line-height: 1.2 !important;
+/* Output Area */
+.gtg-output {
+    background: #2b2b2b !important;
+    border: 1px solid #444 !important;
+    color: #e0e0e0 !important;
+    font-family: monospace !important;
+    resize: vertical !important;
 }
 
-/* Grid Layout */
-.gtg-grid {
-  display: grid !important;
-  grid-template-columns: repeat(5, 1fr) !important; /* Changed from 3 to 5 columns */
-  gap: 8px !important; /* Reduced gap slightly */
-  margin-bottom: 16px !important;
-  width: 100% !important;
-}
-
-/* Tabs & Output */
-.gtg-tabs {
-  margin-top: 26px !important;
-}
-
-.gtg-tab-buttons {
-  display: flex !important;
-  gap: 6px !important;
-  margin-bottom: 8px !important;
-}
-
+/* Buttons */
 .gtg-tab-button {
-  flex: 1 !important;
-  padding: 8px !important;
-  background: #2b2b2b !important;
-  border: 1px solid #444 !important;
-  color: #e0e0e0 !important;
-  border-radius: 4px !important;
-  cursor: pointer !important;
-  font-size: 14px !important;
+    background: #2b2b2b !important;
+    border: 1px solid #444 !important;
+    color: #e0e0e0 !important;
+    cursor: pointer !important;
 }
 
 .gtg-tab-button.active {
-  background: #4361EE !important;
-  border-color: #4361EE !important;
-}
-
-.gtg-output {
-  background: #2b2b2b !important;
-  padding: 12px !important;
-  border-radius: 4px !important;
-  border: 1px solid #444 !important;
-  font-family: monospace !important;
-  color: #e0e0e0 !important;
-  font-size: 14px !important;
-  width: 100% !important;
-  min-height: 120px !important;
-  margin-top: 8px !important;
-}
-
-/* Button Styles */
-.gtg-button-row {
-  display: flex !important;
-  justify-content: center !important;
-  gap: 16px !important;
-  margin-top: 16px !important;
-}
-
-.gtg-action-button {
-  padding: 8px 16px !important;
-  border: none !important;
-  border-radius: 4px !important;
-  color: white !important;
-  cursor: pointer !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  transition: transform 0.2s, box-shadow 0.2s !important;
+    background: #4361EE !important;
+    border-color: #4361EE !important;
 }
 
 .gtg-copy-button {
-  background: linear-gradient(to right, #4361EE, #1F43ED) !important;
+    background: linear-gradient(to right, #4361EE, #1F43ED) !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s !important;
 }
 
-.gtg-action-button:hover {
-  transform: scale(1.05) !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+.gtg-copy-button:hover {
+    transform: scale(1.05) !important;
 }
 
-/* Update these styles in your CSS */
-.gtg-gradient-controls {
-  display: flex !important; /* Changed from grid to flex */
-  align-items: flex-start !important; /* Align items at the top */
-  gap: 24px !important;
-  margin-bottom: 20px !important;
+/* Radio and Checkbox Styles */
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 6px !important;
 }
 
-.gradient-type {
-  width: auto !important;
-}
-
-.gradient-angle {
-  flex: 1 !important;
-}
-
-.gtg-radio-group {
-  display: flex !important;
-  gap: 16px !important;
-  background: #2b2b2b !important;
-  padding: 8px 16px !important;
-  border-radius: 4px !important;
-  border: 1px solid #444 !important;
-  height: 38px !important; /* Match input height */
-  align-items: center !important;
-}
-
-.angle-inputs {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  height: 32px !important; /* Match radio group height */
-}
-
-#gtg-angle-slider {
-  flex: 1 !important;
-  min-width: 150px !important;
-  margin: 0 !important;
-}
-
-.angle-number-group {
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  white-space: nowrap !important;
-}
-
-#gtg-angle-input {
-  width: 50px !important;
-}
+/* Your existing media queries remain the same */}
 
 @media (max-width: 768px) {
-  .gtg-gradient-controls {
+  .gtg- {
     grid-template-columns: 1fr !important;
   }
   
@@ -402,6 +190,7 @@ input[type="checkbox"] {
   }
     
 }
+
 
 
 

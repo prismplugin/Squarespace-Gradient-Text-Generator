@@ -241,7 +241,7 @@ input[type="checkbox"] {
 
 #gtg-font-unit {
     padding: 4px !important;
-    width: 50px !important; /* Fixed width for unit selector */
+    width: 100px !important; /* Fixed width for unit selector */
     margin-left: 2px !important;
 }
 

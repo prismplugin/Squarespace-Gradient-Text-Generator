@@ -3,127 +3,123 @@ body {
     margin: 0;
     padding: 20px;
     font-family: 'Noto Sans', Arial, sans-serif;
+    background: #2b2b2b;
 }
 
-/* Base Container - More compact */
+/* Base Container */
 #gradient-text-generator {
-  max-width: 400px !important; /* Reduced from 800px for sidebar-like layout */
-  margin: 10px !important; /* Reduced from 20px */
-  padding: 10px !important; /* Reduced from 20px */
+    max-width: 400px !important;
+    margin: 10px !important;
+    padding: 10px !important;
+    font-family: 'Noto Sans', Arial, sans-serif !important;
+    color: #e0e0e0;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+#gradient-text-generator * {
+    font-family: 'Noto Sans', Arial, sans-serif !important;
 }
 
 .gtg-main-content {
-  padding: 20px !important; /* Reduced from 32px */
+    background-color: #1a1a1a !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
-/* Compact spacing between sections */
-.gtg-compact-group {
-  gap: 10px !important; /* Reduced from 16px */
-  margin-bottom: 12px !important; /* Reduced from 16px */
+.gtg-tool-title {
+    color: #fff !important;
+    text-align: center !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    margin-bottom: 16px !important;
 }
 
-/* Fix text content and block ID spacing */
-.gtg-compact-group .gtg-input-group {
-  margin-bottom: 0 !important;
-  min-width: 0 !important; /* Allows proper shrinking */
+/* Input Controls */
+.gtg-input-label {
+    display: block !important;
+    color: #b3b3b3 !important;
+    margin-bottom: 4px !important;
+    font-size: 12px !important;
 }
 
-/* Reduce spacing between all elements */
-.gtg-input-group {
-  margin-bottom: 12px !important; /* Reduced from 16px */
+.gtg-input-field {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 6px 8px !important;
+    background-color: #2b2b2b !important;
+    border: 1px solid #444 !important;
+    border-radius: 4px !important;
+    color: #e0e0e0 !important;
+    font-size: 14px !important;
 }
 
-/* More compact grid layout */
-.gtg-grid {
-  gap: 8px !important; /* Reduced from 12px */
-  margin-bottom: 16px !important; /* Reduced from 20px */
+/* Color picker specific styles */
+input[type="color"] {
+    width: 40px !important;
+    height: 32px !important;
+    padding: 0 2px !important;
+    background: #2b2b2b !important;
 }
 
-/* Fix gradient type container */
-.gtg-radio-group {
-  padding: 6px 12px !important; /* Reduced padding */
-  min-width: 140px !important; /* Prevent shrinking below readable size */
-  height: 32px !important; /* Reduced height */
-  white-space: nowrap !important; /* Prevent text wrapping */
+.gtg-color-preview {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 4px !important;
+    border: 1px solid #444 !important;
 }
 
-/* Angle input adjustments */
-#gtg-angle-input {
-  width: 50px !important; /* Reduced from 70px since we only need 3 digits */
-}
-
-.angle-inputs {
-  gap: 8px !important; /* Reduced from 12px */
-  height: 32px !important; /* Match radio group height */
-}
-
-/* Color section adjustments */
-.gtg-color-inputs {
-  padding: 16px 0 !important; /* Reduced from 20px */
-  margin: 16px 0 !important; /* Reduced from 20px */
-}
-
-.gtg-color-input-group {
-  gap: 8px !important; /* Reduced from 12px */
-  margin-bottom: 12px !important; /* Reduced from 16px */
-}
-
-/* Preview area adjustments */
+/* Preview Area */
 .gtg-preview {
-  margin: 16px 0 !important; /* Reduced from 20px */
-  min-height: 120px !important; /* Reduced from 160px */
-  padding: 20px 16px !important; /* Reduced padding */
+    background: #2b2b2b !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-/* Tabs and output adjustments */
-.gtg-tabs {
-  margin-top: 16px !important; /* Reduced from 20px */
+/* Output Area */
+.gtg-output {
+    background: #2b2b2b !important;
+    border: 1px solid #444 !important;
+    color: #e0e0e0 !important;
+    font-family: monospace !important;
+    resize: vertical !important;
 }
 
-.gtg-tab-buttons {
-  gap: 6px !important; /* Reduced from 8px */
-  margin-bottom: 8px !important; /* Reduced from 12px */
+/* Buttons */
+.gtg-tab-button {
+    background: #2b2b2b !important;
+    border: 1px solid #444 !important;
+    color: #e0e0e0 !important;
+    cursor: pointer !important;
 }
 
-/* Button row adjustments */
-.gtg-button-row {
-  margin-top: 16px !important; /* Reduced from 24px */
+.gtg-tab-button.active {
+    background: #4361EE !important;
+    border-color: #4361EE !important;
 }
 
-/* Improved responsive design */
-@media (max-width: 768px) {
-  .gtg-gradient-controls {
-    flex-direction: column !important;
-    gap: 12px !important;
-  }
-  
-  .gtg-radio-group {
-    width: 100% !important;
-    justify-content: space-between !important;
-  }
-
-  .gradient-angle {
-    width: 100% !important;
-  }
-  
-  #gtg-angle-slider {
-    min-width: 100px !important;
-  }
+.gtg-copy-button {
+    background: linear-gradient(to right, #4361EE, #1F43ED) !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s !important;
 }
 
-/* Update grid breakpoints for better mobile layout */
-@media (max-width: 600px) {
-  .gtg-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+.gtg-copy-button:hover {
+    transform: scale(1.05) !important;
 }
 
-@media (max-width: 400px) {
-  .gtg-grid {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .gtg-compact-group {
-    flex-direction: column !important;
-  }
+/* Radio and Checkbox Styles */
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 6px !important;
 }
+
+/* Your existing media queries remain the same */

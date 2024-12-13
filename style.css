@@ -122,18 +122,6 @@ input[type="checkbox"] {
     margin-right: 6px !important;
 }
 
-/* Your existing media queries remain the same */}
-
-@media (max-width: 768px) {
-  .gtg-gradient-controls {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .gradient-type {
-    min-width: 0 !important;
-  }
-}
-
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .gtg-grid {

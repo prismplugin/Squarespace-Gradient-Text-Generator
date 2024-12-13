@@ -52,8 +52,14 @@ body {
     border: 1px solid #444 !important;
     border-radius: 4px !important;
     color: #e0e0e0 !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
 }
+
+  .gtg-radio-group {
+    width: 100% !important;
+    justify-content: space-between !important;
+      height: 0px !important;
+  }
 
 /* Color picker specific styles */
 input[type="color"] {
@@ -125,7 +131,7 @@ input[type="checkbox"] {
 /* Your existing media queries remain the same */}
 
 @media (max-width: 768px) {
-  .gtg-gradient-controls {
+  .gtg- {
     grid-template-columns: 1fr !important;
   }
   

@@ -222,9 +222,46 @@ input[type="checkbox"] {
 .gtg-grid {
   display: grid !important;
   grid-template-columns: repeat(5, 1fr) !important; /* Changed from 3 to 5 columns */
-  gap: 8px !important; /* Reduced gap slightly */
+  gap: 6px !important; /* Reduced gap slightly */
   margin-bottom: 16px !important;
   width: 100% !important;
+}
+
+/* Update base input field styles */
+.gtg-grid .gtg-input-field {
+    padding: 4px !important; /* Reduced padding */
+    text-align: center !important; /* Center text */
+    font-size: 13px !important; /* Slightly smaller font */
+}
+
+/* Special handling for the font size section */
+#gtg-font-size {
+    padding: 4px !important;
+    text-align: center !important;
+    width: 60px !important; /* Give more room for the unit selector */
+}
+
+#gtg-font-unit {
+    padding: 4px !important;
+    text-align: center !important;
+    width: 50px !important; /* Fixed width for unit selector */
+    margin-left: 2px !important;
+}
+
+/* Style adjustments for checkbox labels */
+.gtg-grid .gtg-checkbox-label {
+    padding: 4px !important;
+    justify-content: center !important;
+}
+
+/* Ensure grid maintains proper spacing */
+.gtg-grid {
+    gap: 6px !important; /* Reduced gap for more compact layout */
+}
+
+/* Adjust label spacing */
+.gtg-grid .gtg-input-label {
+    margin-bottom: 4px !important; /* Reduced space between label and input */
 }
 
 /* Tabs & Output */

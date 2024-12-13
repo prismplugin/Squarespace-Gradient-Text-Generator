@@ -121,5 +121,37 @@ input[type="radio"],
 input[type="checkbox"] {
     margin-right: 6px !important;
 }
+/ Improved responsive design */
+@media (max-width: 768px) {
+  .gtg-gradient-controls {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
 
-/* Your existing media queries remain the same */
+  .gtg-radio-group {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+  .gradient-angle {
+    width: 100% !important;
+  }
+
+  #gtg-angle-slider {
+    min-width: 100px !important;
+  }
+}
+/* Update grid breakpoints for better mobile layout */
+@media (max-width: 600px) {
+  .gtg-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 400px) {
+  .gtg-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .gtg-compact-group {
+    flex-direction: column !important;
+  }
+

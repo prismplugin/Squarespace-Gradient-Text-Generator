@@ -78,21 +78,27 @@ body {
 }
 
 .gtg-compact-group {
-  display: flex !important;
-  gap: 16px !important;
-  margin-bottom: 16px !important;
+    display: flex !important;
+    gap: 16px !important;
+    margin-bottom: 16px !important;
+    width: 100% !important;
 }
 
-/* Compact spacing between sections */
-.gtg-compact-group {
-  gap: 10px !important; /* Reduced from 16px */
-  margin-bottom: 12px !important; /* Reduced from 16px */
+/* Fix input group margins and padding */
+.gtg-input-group {
+    margin-bottom: 16px !important;
+    padding: 0 !important;
 }
 
-/* Fix text content and block ID spacing */
-.gtg-compact-group .gtg-input-group {
-  margin-bottom: 0 !important;
-  min-width: 0 !important; /* Allows proper shrinking */
+/* Update the compact group input styles */
+.gtg-compact-group .gtg-input-group:last-child {
+    width: 200px !important;
+    flex: 0 0 200px !important;
+}
+
+.gtg-compact-group .gtg-input-group:first-child {
+    flex: 1 !important;
+    min-width: 0 !important;
 }
 
 .gtg-input-field {
@@ -121,13 +127,7 @@ body {
   width: 100% !important;
 }
 
-/* Ensure preview area can handle larger text */
-.gtg-preview {
-  margin: 16px 0 !important;
-    min-height: 120px !important;
-  padding: 20px !important;
-  overflow: hidden !important;
-}
+
 
 /* Style fixes for radio and checkbox inputs */
 .gtg-input-group label {
@@ -195,16 +195,16 @@ input[type="checkbox"] {
 
 /* Preview Area */
 .gtg-preview {
-  margin: 20px 0 !important;
-  padding: 40px 20px !important;
-  background: #2b2b2b !important;
-  border-radius: 4px !important;
-  text-align: center !important;
-  min-height: 160px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  overflow: visible !important;
+    margin: 20px 0 !important;
+    padding: 40px 20px !important;
+    background: #2b2b2b !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+    min-height: 160px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
 }
 
 .gtg-preview > div {
@@ -343,64 +343,42 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 768px) {
-  .gtg-gradient-controls {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .gradient-type {
-    min-width: 0 !important;
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .gtg-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .gtg-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-      .gtg-gradient-controls {
-    flex-direction: column !important;
-    gap: 12px !important;
-  }
-  
-  .gtg-radio-group {
-    width: 100% !important;
-    justify-content: space-between !important;
-  }
-
-  .gradient-angle {
-    width: 100% !important;
-  }
-    #gtg-angle-slider {
-  flex: 1 !important;
-  min-width: 100px !important;
-  margin: 0 !important;
-}
+    .gtg-gradient-controls {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
     
-}
+    .gtg-radio-group {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
 
-/* Update grid breakpoints for better mobile layout */
-@media (max-width: 600px) {
-  .gtg-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+    .gradient-angle {
+        width: 100% !important;
+    }
+
+    #gtg-angle-slider {
+        min-width: 100px !important;
+    }
+    
+    .gtg-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
 }
 
 @media (max-width: 480px) {
-  .gtg-grid {
-    grid-template-columns: 1fr !important;
-  }
+    .gtg-grid {
+        grid-template-columns: 1fr !important;
+    }
 
-      .gtg-compact-group {
-    flex-direction: column !important;
-  }
-    
+    .gtg-compact-group {
+        flex-direction: column !important;
+    }
+
+    .gtg-compact-group .gtg-input-group:last-child {
+        width: 100% !important;
+        flex: none !important;
+    }
 }
 
 

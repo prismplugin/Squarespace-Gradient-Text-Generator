@@ -79,7 +79,7 @@ body {
 
 .gtg-compact-group {
     display: flex !important;
-    gap: 16px !important;
+    gap: 8px !important;
     margin-bottom: 16px !important;
     width: 100% !important;
     box-sizing: border-box !important;

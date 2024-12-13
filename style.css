@@ -7,9 +7,9 @@ body {
 
 /* Base Container */
 #gradient-text-generator {
-  max-width: 800px;
-  margin: 20px auto !important;
-  padding: 20px;
+  max-width: 400px;
+  margin: 10px auto !important;
+  padding: 10px;
   font-family: 'Noto Sans', Arial, sans-serif !important;
   color: #e0e0e0;
   font-size: 14px !important;
@@ -47,7 +47,7 @@ body {
 
 .gtg-main-content {
   background-color: #1a1a1a !important;
-  padding: 32px !important; /* Increased padding */
+  padding: 20px !important; /* Increased padding */
   border-radius: 8px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
   width: 100% !important;
@@ -64,7 +64,7 @@ body {
 
 /* Input Controls */
 .gtg-input-group {
-  margin-bottom: 16px !important;
+  margin-bottom: 12px !important;
   padding: 0 !important;
 }
 
@@ -83,8 +83,16 @@ body {
   margin-bottom: 16px !important;
 }
 
+/* Compact spacing between sections */
+.gtg-compact-group {
+  gap: 10px !important; /* Reduced from 16px */
+  margin-bottom: 12px !important; /* Reduced from 16px */
+}
+
+/* Fix text content and block ID spacing */
 .gtg-compact-group .gtg-input-group {
   margin-bottom: 0 !important;
+  min-width: 0 !important; /* Allows proper shrinking */
 }
 
 .gtg-input-field {
@@ -115,8 +123,9 @@ body {
 
 /* Ensure preview area can handle larger text */
 .gtg-preview {
-  min-height: 200px !important;
-  padding: 40px !important;
+  margin: 16px 0 !important;
+    min-height: 120px !important;
+  padding: 20px !important;
   overflow: hidden !important;
 }
 
@@ -176,8 +185,8 @@ input[type="checkbox"] {
 .gtg-color-inputs {
   border-top: 1px solid #444 !important;
   border-bottom: 1px solid #444 !important;
-  padding: 20px 0 !important;
-  margin: 20px 0 !important;
+  padding: 16px 0 !important;
+  margin: 16px 0 !important;
 }
 
 .gtg-color-input-group:last-child {
@@ -209,20 +218,20 @@ input[type="checkbox"] {
 .gtg-grid {
   display: grid !important;
   grid-template-columns: repeat(5, 1fr) !important; /* Changed from 3 to 5 columns */
-  gap: 12px !important; /* Reduced gap slightly */
-  margin-bottom: 20px !important;
+  gap: 8px !important; /* Reduced gap slightly */
+  margin-bottom: 16px !important;
   width: 100% !important;
 }
 
 /* Tabs & Output */
 .gtg-tabs {
-  margin-top: 20px !important;
+  margin-top: 26px !important;
 }
 
 .gtg-tab-buttons {
   display: flex !important;
-  gap: 8px !important;
-  margin-bottom: 12px !important;
+  gap: 6px !important;
+  margin-bottom: 8px !important;
 }
 
 .gtg-tab-button {
@@ -259,7 +268,7 @@ input[type="checkbox"] {
   display: flex !important;
   justify-content: center !important;
   gap: 16px !important;
-  margin-top: 24px !important;
+  margin-top: 16px !important;
 }
 
 .gtg-action-button {
@@ -312,8 +321,8 @@ input[type="checkbox"] {
 .angle-inputs {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
-  height: 38px !important; /* Match radio group height */
+  gap: 8px !important;
+  height: 32px !important; /* Match radio group height */
 }
 
 #gtg-angle-slider {
@@ -330,7 +339,7 @@ input[type="checkbox"] {
 }
 
 #gtg-angle-input {
-  width: 70px !important;
+  width: 50px !important;
 }
 
 @media (max-width: 768px) {
@@ -354,11 +363,43 @@ input[type="checkbox"] {
   .gtg-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+
+      .gtg-gradient-controls {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  
+  .gtg-radio-group {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  .gradient-angle {
+    width: 100% !important;
+  }
+    #gtg-angle-slider {
+  flex: 1 !important;
+  min-width: 100px !important;
+  margin: 0 !important;
+}
+    
+}
+
+/* Update grid breakpoints for better mobile layout */
+@media (max-width: 600px) {
+  .gtg-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 
 @media (max-width: 480px) {
   .gtg-grid {
     grid-template-columns: 1fr !important;
   }
+
+      .gtg-compact-group {
+    flex-direction: column !important;
+  }
+    
 }
 

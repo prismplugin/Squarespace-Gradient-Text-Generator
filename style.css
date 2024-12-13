@@ -1,9 +1,6 @@
 @@ -5,138 +5,359 @@ body {
     font-family: 'Noto Sans', Arial, sans-serif;
 }
-
-#gradient-generator {
-    max-width: 800px;
     margin: 0 auto;
 /* Base Container */
 #gradient-text-generator {

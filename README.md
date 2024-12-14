@@ -26,7 +26,7 @@ A professional widget that helps Squarespace users create beautiful gradient tex
 Add this code to your Squarespace website:
 
 ```html
-<script src="https://garrettgraf.github.io/gradient-text-generator/widget.js"></script>
+<script src="https://prismplugin.github.io/squarespace-gradient-text-generator/widget.js"></script>
 <div id="gradient-text-generator"></div>
 <script>
     initGradientGenerator('gradient-text-generator', 'YOUR-LICENSE-KEY');

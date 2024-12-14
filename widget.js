@@ -4,6 +4,101 @@
     // Generate unique widget ID
     const widgetId = 'gradient-text-' + Math.random().toString(36).substr(2, 9);
 
+    // Analytics configuration
+    const ANALYTICS_CONFIG = {
+        enabled: true,
+        creator: 'luxwebsitetemplates.com',
+        version: '1.0.0'
+    };
+
+    // Function to track widget events
+    function trackWidgetEvent(action, label = '') {
+        if (!ANALYTICS_CONFIG.enabled) return;
+
+        try {
+            // Track with Squarespace Analytics if available
+            if (window.Analytics) {
+                window.Analytics.track('Gradient Text Generator', {
+                    action: action,
+                    label: label,
+                    domain: window.location.hostname,
+                    page: window.location.pathname,
+                    widgetId: widgetId,
+                    version: ANALYTICS_CONFIG.version
+                });
+            }
+            
+            // Log to console for debugging
+            console.log(`Widget Event: ${action}`, {
+                domain: window.location.hostname,
+                page: window.location.pathname,
+                widgetId: widgetId
+            });
+        } catch (error) {
+            // Silently fail if tracking fails
+            console.log('Widget loaded on:', window.location.hostname);
+        }
+    }
+
+    // Add tracking to existing functions
+    const originalInitGradientGenerator = initGradientGenerator;
+    function initGradientGenerator(targetId) {
+        // Track initialization
+        trackWidgetEvent('Widget Loaded');
+        
+        // Call original initialization
+        const result = originalInitGradientGenerator(targetId);
+        
+        // Add event tracking to buttons after initialization
+        const copyButton = document.querySelector('.gtg-copy-button');
+        if (copyButton) {
+            const originalCopyHandler = copyButton.onclick;
+            copyButton.onclick = async function(e) {
+                trackWidgetEvent('Code Copied');
+                if (originalCopyHandler) {
+                    return originalCopyHandler.call(this, e);
+                }
+            };
+        }
+
+        // Track tab switches
+        const tabButtons = document.querySelectorAll('.gtg-tab-button');
+        tabButtons.forEach(button => {
+            const originalClickHandler = button.onclick;
+            button.onclick = function(e) {
+                trackWidgetEvent('Tab Switch', button.dataset.tab);
+                if (originalClickHandler) {
+                    return originalClickHandler.call(this, e);
+                }
+            };
+        });
+
+        // Track color changes
+        const colorInputs = document.querySelectorAll('input[type="color"]');
+        colorInputs.forEach(input => {
+            const originalChangeHandler = input.onchange;
+            input.onchange = function(e) {
+                trackWidgetEvent('Color Changed', input.id);
+                if (originalChangeHandler) {
+                    return originalChangeHandler.call(this, e);
+                }
+            };
+        });
+
+        // Track gradient type changes
+        const gradientTypeInputs = document.querySelectorAll('input[name="gradientType"]');
+        gradientTypeInputs.forEach(input => {
+            const originalChangeHandler = input.onchange;
+            input.onchange = function(e) {
+                trackWidgetEvent('Gradient Type Changed', input.value);
+                if (originalChangeHandler) {
+                    return originalChangeHandler.call(this, e);
+                }
+            };
+        });
+
+        return result;
+    }
     // Utility Functions
     function validateAndFormatColor(value) {
         let color = value.trim().replace(/[^0-9A-Fa-f#]/g, '');

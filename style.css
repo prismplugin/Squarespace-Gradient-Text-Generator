@@ -1,8 +1,7 @@
 /* Root styles */
 body {
-    margin: 0;
-    padding: 20px;
-    font-family: 'Noto Sans', Arial, sans-serif;
+    margin: 0 !important;
+    padding: 0 !important; /* Remove body padding */
 }
 
 /* Base Container */
@@ -406,7 +405,14 @@ input[type="checkbox"] {
 @media (max-width: 480px) {
     .gtg-grid {
         grid-template-columns: 1fr !important;
+        gap:12px !important;
+        padding:0 8px;
+        
     }
+
+    .gtg-preview {
+        margin: 12px 0 !important;
+    
 
     .gtg-compact-group {
         flex-direction: column !important;

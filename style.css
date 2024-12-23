@@ -79,7 +79,7 @@ body {
 .gtg-compact-group {
     display: flex !important;
     gap: 8px !important;
-    margin-bottom: 16px !important;
+    margin-top: 8px !important;
     width: 100% !important;
     box-sizing: border-box !important;
 }
@@ -198,12 +198,12 @@ input[type="checkbox"] {
 
 /* Preview Area */
 .gtg-preview {
-    margin: 20px 0 !important;
-    padding: 40px 20px !important;
+    margin: 00px 0 !important;
+    padding: 0px 20px !important;
     background: #2b2b2b !important;
     border-radius: 4px !important;
     text-align: center !important;
-    min-height: 160px !important;
+    min-height: 100px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;

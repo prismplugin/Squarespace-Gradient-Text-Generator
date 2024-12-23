@@ -334,7 +334,7 @@
         widget.id = widgetId;
         widget.innerHTML = `
     <div class="gtg-main-content">
-        <h2 class="gtg-tool-title">Gradient Text Generator for Squarespace</h2>
+        <div class="gtg-preview" id="gtg-preview"></div>
         <div class="gtg-compact-group">
             <div class="gtg-input-group" style="flex: 1;">
                 <label class="gtg-input-label">Text Content</label>
@@ -467,8 +467,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="gtg-preview" id="gtg-preview"></div>
 
         <div class="gtg-tabs">
             <div class="gtg-tab-buttons">

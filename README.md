@@ -18,8 +18,6 @@ A professional widget that helps Squarespace users create beautiful gradient tex
 - Real-time preview
 - Optional block/section ID targeting
 - One-click code copying
-- Mobile-responsive design
-- Dark mode interface
 
 ## Installation
 
@@ -48,8 +46,9 @@ Replace `YOUR-LICENSE-KEY` with the license key provided in your purchase confir
    - Choose 2-5 colors
    - Adjust gradient angle (for linear gradients)
 4. Preview your design in real-time
-5. Copy the generated code
-6. Paste into your Squarespace Custom CSS section
+5. Copy the generated CSS and paste into the header code injection of your page (advanced -> header code injection)
+6. Copy the HTML code and paste into a 'code' block on your page
+
 
 ## Support
 
